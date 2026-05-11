@@ -6,6 +6,7 @@ __pycache__
 .ipynb_checkpoints
 *.nc
 *.json
+!CMakePresets.json
 *.mp4
 *.png
 continuity
@@ -13,3 +14,7 @@ navier_stokes
 plasma
 temp_navier_stokes
 temp_plasma
+
+build/
+.venv*
+.user/
