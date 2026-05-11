@@ -1,0 +1,24 @@
+{
+    "version": 6,
+    "configurePresets": [
+        {
+            "name": "cpu",
+            "displayName": "Single core CPU",
+            "binaryDir": "${sourceDir}/build/cpu",
+            "cacheVariables": {
+                "CCCL_THRUST_DEVICE_SYSTEM": "CPP",
+                "CMAKE_CXX_FLAGS": "-march=native -O3 -Wall -Wextra -Wpedantic",
+                "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}",
+                "CMAKE_CXX_STANDARD": "17",
+                "CMAKE_CXX_STANDARD_REQUIRED": "ON",
+                "CMAKE_CXX_EXTENSIONS": "OFF"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "cpu",
+            "configurePreset": "cpu"
+        }
+    ]
+}
