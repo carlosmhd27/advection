@@ -9,6 +9,8 @@ __pycache__
 !CMakePresets.json
 *.mp4
 *.png
+
+## Binary files
 continuity
 navier_stokes
 plasma
@@ -16,5 +18,14 @@ temp_navier_stokes
 temp_plasma
 
 build/
+Debug/
+Release/
+*.vcxproj*
+*.exe
+*.dll
+
+## Python environments
 .venv*
+
+## User specific files
 .user/
