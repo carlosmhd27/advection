@@ -70,6 +70,7 @@ struct Continuity
 
     void operator() ( double t, const dg::HVec & y, dg::HVec& yp)
     {
+        (void)t; //avoid unused parameter warning
         m_called++;
         unsigned Nx = m_g.N();
         double hx = m_g.h();

@@ -140,7 +140,7 @@ struct PlasmaExplicit
         //    return;
         //}
 
-        unsigned iter;
+        unsigned iter = 0;
         if( m_mode == "adiabatic")
             dg::blas1::copy( nn[1], m_rhs);
         else
@@ -426,7 +426,8 @@ struct PlasmaImplicitSolver
 {
     PlasmaImplicitSolver( dg::Grid1d g, dg::file::WrappedJsonValue js, PlasmaImplicit& im) :
         m_tmp( {dg::HVec(g.size(), 0.0), dg::HVec ( g.size(), 0.),
-                dg::HVec(g.size(), 0.0), dg::HVec ( g.size(), 0.)}), m_im(im){}
+                dg::HVec(g.size(), 0.0), dg::HVec ( g.size(), 0.)}),
+        m_im(im), m_js(js){}
     // solve (y - alpha I(t,y) = rhs
     void operator()( double alpha, double t, Vector& y, const Vector& rhs)
     {
@@ -438,6 +439,8 @@ struct PlasmaImplicitSolver
     private:
     Vector m_tmp;
     PlasmaImplicit& m_im;
+    // Avoid unused parameter warning
+    dg::file::WrappedJsonValue m_js;
 
 };
 

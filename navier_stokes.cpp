@@ -526,6 +526,7 @@ struct NavierStokesImplicit
 
     void operator() ( double t, const Vector & y, Vector& yp)
     {
+        (void)t; // avoid unused parameter warning
         dg::blas1::copy( 0., yp);
         unsigned Nx = m_ex.m_g.N();
         double hx = m_ex.m_g.h();
@@ -581,7 +582,7 @@ struct NavierStokesImplicit
 struct NavierStokesImplicitSolver
 {
     NavierStokesImplicitSolver( dg::Grid1d g, dg::file::WrappedJsonValue js, NavierStokesImplicit& im) :
-        m_tmp( {dg::HVec(g.size(), 0.0), dg::HVec ( g.size(), 0.)}), m_im(im){}
+        m_tmp( {dg::HVec(g.size(), 0.0), dg::HVec ( g.size(), 0.)}), m_im(im), m_js(js){}
     // solve (y - alpha I(t,y) = rhs
     void operator()( double alpha, double t, Vector& y, const Vector& rhs)
     {
@@ -593,6 +594,8 @@ struct NavierStokesImplicitSolver
     private:
     Vector m_tmp;
     NavierStokesImplicit& m_im;
+    // Avoid unused parameter warning
+    dg::file::WrappedJsonValue m_js;
 
 };
 
