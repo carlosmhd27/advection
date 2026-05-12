@@ -18,7 +18,7 @@ include(cmake/CPM.cmake)
 
 ## There seem to be some be some errors in the way feltor installs jsoncpp,
 ## so we add it as a dependency here and include the headers manually.
-include(cmake/FindJSONcpp.cmake)
+include(cmake/InstallJSONCPP.cmake)
 
 find_package(netCDF CONFIG REQUIRED)
 find_package(hdf5 CONFIG REQUIRED)
@@ -39,13 +39,18 @@ if(CCCL_THRUST_DEVICE_SYSTEM STREQUAL "CPP")
     set(CMAKE_CXX_EXTENSIONS OFF)
 endif()
 
+if(MSVC)
+    set(HDF5_LIBRARIES hdf5::hdf5-shared hdf5::hdf5_hl-shared)
+else()
+    set(HDF5_LIBRARIES hdf5 hdf5_hl)
+endif()
+
 foreach(target IN ITEMS continuity navier_stokes plasma temp_navier_stokes temp_plasma)
     add_executable(${target} ${target}.cpp)
 
     target_link_libraries(${target} PRIVATE
         netCDF::netcdf
-        hdf5::hdf5-shared
-        hdf5::hdf5_hl-shared
+        ${HDF5_LIBRARIES}
         jsoncpp_lib
         feltor::dg::dg
     )
