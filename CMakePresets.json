@@ -8,10 +8,20 @@
             "cacheVariables": {
                 "CCCL_THRUST_DEVICE_SYSTEM": "CPP",
                 "CMAKE_CXX_FLAGS": "-march=native -O3 -Wall -Wextra -Wpedantic",
+                "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}"
+            }
+        },
+        {
+            "name": "msvc-cpu",
+            "displayName": "Single core CPU on Windows",
+            "binaryDir": "${sourceDir}/build/cpu",
+            "cacheVariables": {
+                "CCCL_THRUST_DEVICE_SYSTEM": "CPP",
+                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+                "CMAKE_CXX_FLAGS": "/arch:AVX2 /O2 /EHsc /permissive- /D_USE_MATH_DEFINES",
                 "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}",
-                "CMAKE_CXX_STANDARD": "17",
-                "CMAKE_CXX_STANDARD_REQUIRED": "ON",
-                "CMAKE_CXX_EXTENSIONS": "OFF"
+                "FELTOR_DG_WITH_MATRIX": false,
+                "CMAKE_BUILD_TYPE": "Release"
             }
         }
     ],
@@ -19,6 +29,10 @@
         {
             "name": "cpu",
             "configurePreset": "cpu"
+        },
+        {
+            "name": "msvc-cpu",
+            "configurePreset": "msvc-cpu"
         }
     ]
 }
