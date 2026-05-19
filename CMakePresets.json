@@ -6,7 +6,6 @@
             "displayName": "Single core CPU",
             "binaryDir": "${sourceDir}/build/cpu",
             "cacheVariables": {
-                "CCCL_THRUST_DEVICE_SYSTEM": "CPP",
                 "CMAKE_CXX_FLAGS": "-march=native -O3 -Wall -Wextra -Wpedantic",
                 "$comment": "The actual output should be build/cpu/bin, however, this is needed for the jupyter notebook to work without changes.",
                 "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}"
@@ -17,7 +16,6 @@
             "displayName": "Single core CPU on Windows",
             "binaryDir": "${sourceDir}/build/cpu",
             "cacheVariables": {
-                "CCCL_THRUST_DEVICE_SYSTEM": "CPP",
                 "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
                 "CMAKE_CXX_FLAGS": "/arch:AVX2 /O2 /EHsc /permissive- /D_USE_MATH_DEFINES",
                 "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}",
