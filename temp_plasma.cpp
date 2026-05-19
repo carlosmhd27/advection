@@ -136,7 +136,7 @@ struct PlasmaExplicit
         //initial guess
         m_old_phi.extrapolate( t, m_phi);
 
-        unsigned iter;
+        unsigned iter = 0;
         if( m_mode == "adiabatic")
         {
             dg::HVec tt ( nt[1]);
@@ -422,7 +422,7 @@ struct PlasmaImplicit
 
 struct PlasmaImplicitSolver
 {
-    PlasmaImplicitSolver( dg::Grid1d g, dg::file::WrappedJsonValue js, PlasmaImplicit& im) :
+    PlasmaImplicitSolver( dg::Grid1d g, dg::file::WrappedJsonValue , PlasmaImplicit& im) :
         m_tmp( {dg::HVec(g.size(), 0.0), dg::HVec ( g.size(), 0.),
                 dg::HVec(g.size(), 0.0), dg::HVec ( g.size(), 0.)}), m_im(im){}
     // solve (y - alpha I(t,y) = rhs
@@ -732,7 +732,7 @@ int main( int argc, char* argv[])
     }
 
     // Set up netcdf
-    std::string inputfile = js.asJson().toStyledString(); //save input without comments, which is important if netcdf file is later read by another parser
+    std::string inputfile = js.toStyledString(); //save input without comments, which is important if netcdf file is later read by another parser
     std::string outputfile;
     if( argc == 1 || argc == 2)
         outputfile = "plasma.nc";

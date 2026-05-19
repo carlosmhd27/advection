@@ -275,7 +275,7 @@ struct NavierStokesImplicit
 {
     NavierStokesImplicit( NavierStokesExplicit& ex) : m_ex(ex){}
 
-    void operator() ( double t, const Vector & y, Vector& yp)
+    void operator() ( double , const Vector & y, Vector& yp)
     {
         dg::blas1::copy( 0., yp);
         unsigned Nx = m_ex.m_g.N();
@@ -315,7 +315,7 @@ struct NavierStokesImplicit
 
 struct NavierStokesImplicitSolver
 {
-    NavierStokesImplicitSolver( dg::Grid1d g, dg::file::WrappedJsonValue js, NavierStokesImplicit& im) :
+    NavierStokesImplicitSolver( dg::Grid1d g, dg::file::WrappedJsonValue , NavierStokesImplicit& im) :
         m_tmp( {dg::HVec(g.size(), 0.0), dg::HVec ( g.size(), 0.), dg::HVec (g.size(), 0.)}), m_im(im){}
     // solve (y - alpha I(t,y) = rhs
     void operator()( double alpha, double t, Vector& y, const Vector& rhs)
@@ -569,7 +569,7 @@ int main( int argc, char* argv[])
     }
 
     // Set up netcdf
-    std::string inputfile = js.asJson().toStyledString(); //save input without comments, which is important if netcdf file is later read by another parser
+    std::string inputfile = js.toStyledString(); //save input without comments, which is important if netcdf file is later read by another parser
     std::string outputfile;
     if( argc == 1 || argc == 2)
         outputfile = "navier-stokes.nc";

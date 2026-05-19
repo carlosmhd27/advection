@@ -424,10 +424,10 @@ struct PlasmaImplicit
 
 struct PlasmaImplicitSolver
 {
-    PlasmaImplicitSolver( dg::Grid1d g, dg::file::WrappedJsonValue js, PlasmaImplicit& im) :
+    PlasmaImplicitSolver( dg::Grid1d g, dg::file::WrappedJsonValue , PlasmaImplicit& im) :
         m_tmp( {dg::HVec(g.size(), 0.0), dg::HVec ( g.size(), 0.),
                 dg::HVec(g.size(), 0.0), dg::HVec ( g.size(), 0.)}),
-        m_im(im), m_js(js){}
+        m_im(im){}
     // solve (y - alpha I(t,y) = rhs
     void operator()( double alpha, double t, Vector& y, const Vector& rhs)
     {
@@ -439,8 +439,6 @@ struct PlasmaImplicitSolver
     private:
     Vector m_tmp;
     PlasmaImplicit& m_im;
-    // Avoid unused parameter warning
-    dg::file::WrappedJsonValue m_js;
 
 };
 
@@ -721,7 +719,7 @@ int main( int argc, char* argv[])
     }
 
     // Set up netcdf
-    std::string inputfile = js.asJson().toStyledString(); //save input without comments, which is important if netcdf file is later read by another parser
+    std::string inputfile = js.toStyledString(); //save input without comments, which is important if netcdf file is later read by another parser
     std::string outputfile;
     if( argc == 1 || argc == 2)
         outputfile = "plasma.nc";

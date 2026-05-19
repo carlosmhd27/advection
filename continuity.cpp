@@ -68,9 +68,8 @@ struct Continuity
         m_ell = { g};
     }
 
-    void operator() ( double t, const dg::HVec & y, dg::HVec& yp)
+    void operator() ( double , const dg::HVec & y, dg::HVec& yp)
     {
-        (void)t; //avoid unused parameter warning
         m_called++;
         unsigned Nx = m_g.N();
         double hx = m_g.h();
@@ -282,7 +281,7 @@ int main( int argc, char* argv[])
             std::tie(rhs,filter), dg::pid_control, dg::l2norm, rtol, atol);
 
     // Set up netcdf
-    std::string inputfile = js.asJson().toStyledString(); //save input without comments, which is important if netcdf file is later read by another parser
+    std::string inputfile = js.toStyledString(); //save input without comments, which is important if netcdf file is later read by another parser
     std::string outputfile;
     if( argc == 1 || argc == 2)
         outputfile = "equations.nc";
