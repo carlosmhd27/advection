@@ -9,8 +9,6 @@ include $(FELTOR_PATH)/config/devices/devices.mk
 
 INCLUDE+=-I$(FELTOR_PATH)/inc/
 
-LIBS=-lnetcdf -lhdf5 -lhdf5_hl -ljsoncpp
-
 all: continuity navier_stokes plasma temp_navier_stokes temp_plasma
 
 continuity: continuity.cpp common.h
