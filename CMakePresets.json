@@ -8,6 +8,7 @@
             "cacheVariables": {
                 "CCCL_THRUST_DEVICE_SYSTEM": "CPP",
                 "CMAKE_CXX_FLAGS": "-march=native -O3 -Wall -Wextra -Wpedantic",
+                "$comment": "The actual output should be build/cpu/bin, however, this is needed for the jupyter notebook to work without changes.",
                 "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}"
             }
         },
